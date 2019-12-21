@@ -1,6 +1,5 @@
 const fs = require('fs');
 const express = require('express');
-const http = require('http');
 const app = express();
 
 app.use(express.json());
@@ -68,6 +67,7 @@ app.put('/user', (req, res) => {
         name,
         password,
         favouriteFruit,
+        favouriteMovie, //Added by Abhigna.
         favouriteNumber,
     }
 
@@ -78,9 +78,6 @@ app.put('/user', (req, res) => {
 
     fs.writeFileSync('./storage/account.json', JSON.stringify(data, 2, 4), 'utf-8', res.send("Account Updated"));
 })
+//Moved server creation to server.js file to test the API functionality
 
-http.createServer(app).listen(9999, () => {
-    console.log("Application listening on PORT 9999");
-});
-
-
+module.exports = app
